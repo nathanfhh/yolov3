@@ -149,6 +149,16 @@ def set_logging(name=LOGGING_NAME, verbose=True):
 
 set_logging(LOGGING_NAME)  # run before defining LOGGER
 LOGGER = logging.getLogger(LOGGING_NAME)  # define globally (used in train.py, val.py, detect.py, etc.)
+run_folder = Path(__file__).absolute().parent.parent / "run"
+if not run_folder.exists():
+    run_folder.mkdir(exist_ok=True, parents=True)
+file_handler = logging.FileHandler('handler.log')
+file_format = logging.Formatter('%(levelname)s - %(message)s')
+file_handler.setFormatter(file_format)
+file_handler.setLevel(logging.INFO)
+LOGGER.addHandler(file_handler)
+
+
 if platform.system() == 'Windows':
     for fn in LOGGER.info, LOGGER.warning:
         setattr(LOGGER, fn.__name__, lambda x: fn(emojis(x)))  # emoji safe logging
