@@ -342,7 +342,7 @@ def smart_optimizer(model, name='Adam', lr=0.001, momentum=0.9, decay=1e-5):
     elif name == 'Sophia':
         optimizer = Sophia(g[2], lr=lr, betas=(momentum, 0.999), rho=0.04, weight_decay=0.0)
     elif name == 'Lion':
-        optimizer = Lion(g[2], lr=lr, betas=(momentum, 0.999), weight_decay=0.0)
+        optimizer = Lion(g[2], lr=lr, betas=(momentum, 0.999), weight_decay=decay)
     else:
         raise NotImplementedError(f'Optimizer {name} not implemented.')
 
