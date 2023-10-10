@@ -20,7 +20,7 @@ import torch.nn.functional as F
 from torch.nn.parallel import DistributedDataParallel as DDP
 
 from utils.general import LOGGER, check_version, colorstr, file_date, git_describe
-from utils.sophia import SophiaG
+from utils.sophia import Sophia
 from utils.lion import Lion
 
 
@@ -339,8 +339,8 @@ def smart_optimizer(model, name='Adam', lr=0.001, momentum=0.9, decay=1e-5):
         optimizer = torch.optim.RMSprop(g[2], lr=lr, momentum=momentum)
     elif name == 'SGD':
         optimizer = torch.optim.SGD(g[2], lr=lr, momentum=momentum, nesterov=True)
-    elif name == 'SophiaG':
-        optimizer = SophiaG(g[2], lr=lr, betas=(momentum, 0.999), rho=0.04, weight_decay=0.0)
+    elif name == 'Sophia':
+        optimizer = Sophia(g[2], lr=lr, betas=(momentum, 0.999), rho=0.04, weight_decay=0.0)
     elif name == 'Lion':
         optimizer = Lion(g[2], lr=lr, betas=(momentum, 0.999), rho=0.04, weight_decay=0.0)
     else:
