@@ -1,3 +1,7 @@
+import torch
+from torch.optim.optimizer import Optimizer
+
+
 class Lion(Optimizer):
     # Based on - https://github.com/lucidrains/lion-pytorch/blob/main/lion_pytorch/lion_pytorch.py
     def __init__(self, params, lr=1e-4, betas=(0.9, 0.99), weight_decay=0.0):
